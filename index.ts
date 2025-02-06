@@ -3,4 +3,4 @@ Bun.serve({
       return new Response("hello from bun");
     },
 });
-console.log("Bun server running!");
+console.log("Bun server running :)");
