@@ -12,7 +12,7 @@ const storeSchema = z.object({
   ]),
 });
 
-type Store = z.infer<typeof storeSchema>;
+export type Store = z.infer<typeof storeSchema>;
 
 const createPostSchema = storeSchema;
 
@@ -35,6 +35,14 @@ const storeData: Store[] = [
   },
 ];
 
-export const storesRoute = new Hono().get("/", (c) => {
-  return c.json({ stores: storeData });
-});
+export const storesRoute = new Hono()
+  .get("/", (c) => {
+    return c.json({ stores: storeData });
+  })
+
+  .post("/newStore", zValidator("json", createPostSchema), async (c) => {
+    const store = await c.req.valid("json");
+    storeData.push(store);
+    c.status(201);
+    return c.json(store);
+  });
