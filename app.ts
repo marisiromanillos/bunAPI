@@ -1,19 +1,23 @@
-import { Hono } from 'hono'
-import { logger } from 'hono/logger'
-import { expensesRoute } from './routes/expenses';
+import { Hono } from "hono";
+import { logger } from "hono/logger";
+import { expensesRoute } from "./routes/expenses";
+import { storesRoute } from "./routes/stores";
 
-const app = new Hono()
+const app = new Hono();
 
-// Terminal Logs - Use to debug your routes
-app.use('*', logger());
+app.use("*", logger());
 
-app.get('/api/hello', (c) => {
-    return c.json({
-      ok: true,
-      message: 'Hello Hono!',
-    })
-  })
+app.get("/api/hello", (c) => {
+  return c.json({
+    ok: true,
+    message: "Hello Hono!",
+  });
+});
 
+// api
 app.route("/api/expenses", expensesRoute);
 
-export default app
+// stores route
+app.route("/api/stores", storesRoute);
+
+export default app;
