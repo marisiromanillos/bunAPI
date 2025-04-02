@@ -3,7 +3,6 @@ import { describe, it, expect, beforeEach } from "bun:test";
 import { storesRoute } from "../routes/stores";
 import type { Store } from "../routes/stores";
 
-// Describe the suite of tests for the stores routes
 describe("Stores API (/stores)", () => {
   // --- GET / ---
   describe("GET /", () => {
